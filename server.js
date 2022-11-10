@@ -1,6 +1,8 @@
+
 'use strict';
 const express = require('express');
 const { Pool, Client } = require('pg');
+
 // Constants
 const PORT = 8080;
 const HOST = '0.0.0.0';
@@ -13,7 +15,8 @@ const client = new Client({
   database: 'd4paqjd7gmgq2',//'persons',
   password: '8fd63bb9ee3bdf2cfa764a0e77c707157d4ca37f597ec46bf43a2703e5eec9e2',//'test',
   port: 5432,
-  ssl: true
+  ssl: { rejectUnauthorized: false }
+  //ssl: true
 });
 
 client.connect();
