@@ -4,7 +4,7 @@ const express = require('express');
 const { Pool, Client } = require('pg');
 
 // Constants
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 const HOST = '0.0.0.0';
 // App
 const app = express();
@@ -25,7 +25,7 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.listen(PORT, HOST);
+app.listen(PORT);
 
 console.log(`Running on http://${HOST}:${PORT}`);
 
