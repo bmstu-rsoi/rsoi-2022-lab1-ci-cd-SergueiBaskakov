@@ -1,19 +1,42 @@
 version: "3"
 services:
-  postgres:
-    image: library/postgres:13
-    container_name: postgres
-    restart: on-failure
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: "postgres"
-      POSTGRES_DB: postgres
-    volumes:
-      - db-data:/var/lib/postgresql/data
-      - ./postgres/:/docker-entrypoint-initdb.d/
-    ports:
-      - "5432:5432"
-
+    app:
+        restart: on-failure
+        build: .
+        depends_on:
+            - postgres
+        environment:
+            DATABASE_URL: postgres://program:test@localhost:5432/persons
+            NODE_ENV: development
+            PORT: 8080
+        ports:
+            - "8080:8080"
+        volumes:
+            - .:/app/
+            - /app/node_modules
+    
+    postgres:
+        image: library/postgres:13
+        container_name: postgres
+        restart: on-failure
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: "postgres"
+            POSTGRES_DB: postgres
+        volumes:
+            - db-data:/var/lib/postgresql/data
+            - ./postgres/:/docker-entrypoint-initdb.d/
+        ports:
+            - "5432:5432"
+    
+    pgadmin:
+        container_name: pgadmin4_container
+        image: dpage/pgadmin4
+        restart: always
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@admin.com
+            PGADMIN_DEFAULT_PASSWORD: admin
+        ports:
+            - "5050:80"
 volumes:
-  db-data:
-
+    db-data:
