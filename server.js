@@ -8,11 +8,12 @@ const HOST = '0.0.0.0';
 const app = express();
 
 const client = new Client({
-  user: 'program',
-  host: 'postgres',
-  database: 'persons',
-  password: 'test',
+  user: 'jtjortuwbxrfga',//'program',
+  host: 'ec2-3-219-135-162.compute-1.amazonaws.com',//'postgres',
+  database: 'd4paqjd7gmgq2',//'persons',
+  password: '8fd63bb9ee3bdf2cfa764a0e77c707157d4ca37f597ec46bf43a2703e5eec9e2',//'test',
   port: 5432,
+  ssl: true
 });
 
 client.connect();
