@@ -31,6 +31,7 @@ console.log(`Running on http://${HOST}:${PORT}`);
 
 app.get('/', (req, res) => {
   res.send('Hello World App');
+
 });
 
 app.get('/api/v1/persons/:personId', (req, res) => {
